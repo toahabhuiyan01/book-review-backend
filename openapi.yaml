@@ -1,0 +1,353 @@
+openapi: 3.0.1
+info:
+  title: Book Review API
+  version: 1.0.0
+
+servers:
+  - url: http://localhost:3000
+    description: Local server
+paths:
+  /register:
+    post:
+      tags:
+        - Auth
+      operationId: registerUser
+      summary: Register a new user
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserRegister'
+      responses:
+        '200':
+          description: User registered successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    description: User registered successfully
+  /login:
+    post:
+      tags:
+        - Auth
+      operationId: loginUser
+      summary: Login a user
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LoginWithCreds'
+      responses:
+        '200':
+          description: User logged in successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LoginResponse'
+  /user:
+    patch:
+      tags:
+        - User
+      operationId: userPatch
+      summary: Update user details
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserPatch'
+      responses:
+        '200':
+          description: User details updated successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    description: User details updated successfully
+  /book-review:
+    get:
+      tags:
+        - Review
+      operationId: bookReviewGet
+      summary: Get all reviews
+      parameters:
+        - in: query
+          name: id
+          description: Fetch the reviews of a specific user
+          schema:
+            type: string
+        - in: query
+          name: page
+          description: Page number
+          schema:
+            type: number
+        - in: query
+          name: limit
+          description: Number of reviews per page
+          schema:
+            type: number
+      responses:
+        '200':
+          description: Reviews fetched successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  total:
+                    type: number
+                    description: Total number of reviews
+                  currentPage:
+                    type: number
+                    description: Current page number
+                  reviews:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/BookReview'
+    post:
+      tags:
+        - Review
+      operationId: bookReviewPost
+      summary: Book a review
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BookReviewPost'
+      responses:
+        '200':
+          description: Review booked successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  review:
+                    $ref: '#/components/schemas/BookReview'
+  /book-review/{reviewId}:
+    patch:
+      tags:
+        - Review
+      operationId: bookReviewPatch
+      summary: Update a review
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: reviewId
+          in: path
+          required: true
+          description: ID of the review
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BookReviewPatch'
+      responses:
+        '200':
+          description: Review updated successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    description: Review updated successfully
+    delete:
+      tags:
+        - Review
+      operationId: bookReviewDelete
+      summary: Delete a review
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: reviewId
+          in: path
+          required: true
+          description: ID of the review
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Review deleted successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    description: Review deleted successfully
+
+components:
+  schemas:
+    Timestamp:
+      type: string
+      format: date-time
+    UserId:
+      type: string
+      description: ID of the user
+    UserName:
+      type: string
+      description: Name of the user
+    Rating:
+      type: number
+      description: Rating of the shop or user
+    Review:
+      type: number
+      description: Review count
+    LoginWithCreds:
+      type: object
+      required:
+        - email
+        - password
+      properties:
+        email:
+          type: string
+          description: Email of the user
+        password:
+          type: string
+          description: Password of the user
+    BookReview:
+      type: object
+      required:
+        - rating
+      properties:
+        id: 
+          type: string
+          description: ID of the review
+        rating:
+          $ref: '#/components/schemas/Rating'
+        reviewText:
+          type: string
+          description: Comment for the rating
+        createdAt:
+          $ref: '#/components/schemas/Timestamp'
+        bookTitle:
+          type: string
+          description: Title of the book
+        bookAuthor:
+          type: string
+          description: Author of the book
+    BookReviewPatch:
+      type: object
+      properties:
+        rating:
+          $ref: '#/components/schemas/Rating'
+        reviewText:
+          type: string
+          description: Comment for the rating
+        bookTitle:
+          type: string
+          description: Title of the book
+        bookAuthor:
+          type: string
+          description: Author of the book
+    BookReviewPost:
+      type: object
+      required:
+        - rating
+        - bookTitle
+        - bookAuthor
+      properties:
+        rating:
+          $ref: '#/components/schemas/Rating'
+        reviewText:
+          type: string
+          description: Comment for the rating
+        bookTitle:
+          type: string
+          description: Title of the book
+        bookAuthor:
+          type: string
+          description: Author of the book
+        
+    LoginWithRefreshtoken:
+      type: object
+      required:
+        - refreshToken
+      properties:
+        refreshToken:
+          type: string
+          description: Refresh token of the user
+    RatingPatch:
+      type: object
+      properties:
+        rating:
+          $ref: '#/components/schemas/Rating'
+        comment:
+          type: string
+          description: Comment for the rating
+    UserRegister:
+      type: object
+      required:
+        - username
+        - email
+        - password
+      properties:
+        username:
+          $ref: '#/components/schemas/UserName'
+        email:
+          type: string
+          description: Email of the user
+        password:
+          type: string
+          description: Password of the user
+    LoginResponse:
+      type: object
+      required:
+        - accessToken
+      properties:
+        accessToken:
+          type: string
+          description: JWT token for the user
+        refreshToken:
+          type: string
+          description: Refresh token for the user
+    User:
+      type: object
+      required:
+        - id
+        - username
+        - email
+        - createdAt
+      properties:
+        id: 
+          $ref: '#/components/schemas/UserId'
+        username:
+          $ref: '#/components/schemas/UserName'
+        email:
+          type: string
+          description: Email of the user
+        createdAt:
+          $ref: '#/components/schemas/Timestamp'
+        avatar:
+          type: string
+          description: URL of the user's profile image
+    UserPatch:
+      type: object
+      properties:
+        username:
+          $ref: '#/components/schemas/UserName'
+        email:
+          type: string
+          description: Email of the user
+        avatar:
+          type: string
+          description: URL of the user's profile image
