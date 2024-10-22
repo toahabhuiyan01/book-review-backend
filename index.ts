@@ -38,4 +38,16 @@ app.listen(PORT, () => {
 	console.log('Listening on 9090')
 })
 
-export default app
+export default function handler(req, res) {
+	api.handleRequest(
+		{
+			method: req.method,
+			path: req.path,
+			body: req.body,
+			query: req.query as { [key: string]: string | string[] },
+			headers: req.headers as { [key: string]: string | string[] },
+		},
+		req,
+		res
+	)
+}
