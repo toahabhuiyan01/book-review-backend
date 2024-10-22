@@ -12,7 +12,7 @@ provider:
   versionFunctions: false
 functions:
   api:
-    handler: src/api.handler
+    handler: src/index.handler
     timeout: 20
     reservedConcurrency: 50
     events:
