@@ -3,6 +3,9 @@ import makeApi from './make-api'
 import routes from '../routes'
 import Cors from 'cors'
 import { urlencoded, json } from 'body-parser'
+import dotenv from 'dotenv'
+
+dotenv.config()
 
 // here we are using express, we can use any backend framework
 
