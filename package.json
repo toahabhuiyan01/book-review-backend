@@ -1,7 +1,7 @@
 {
   "name": "@bookreview/backend",
   "version": "1.0.0",
-  "main": "build/api/serve-api.js",
+  "main": "build/index.js",
   "scripts": {
     "type:gen": "npx openapi-typescript ./openapi.yaml -o src/types/openapi.ts --root-types",
     "types:clean": "npx ts-node src/types/generator-util.ts",
@@ -9,9 +9,9 @@
     "lint": "eslint ./src --ext .js,.ts",
     "lint:fix": "npm run lint -- --fix",
     "postinstall": "npm run build",
-    "build": "tsc && copyfiles -u 1 src/api/openapi.yaml build",
+    "build": "tsc",
     "watch-build": "tsc -w",
-    "start": "node build/api/serve-api.js",
+    "start": "node build/index.js",
     "watch-start": "nodemon --delay 2 -w build/ -x 'npm run start'",
     "dev": "concurrently -k -p '[{name}]' -n 'typescript,api' -c 'yellow.bold,cyan.bold' npm:watch-build npm:watch-start"
   },

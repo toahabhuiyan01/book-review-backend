@@ -1,6 +1,6 @@
 import Express from 'express'
-import makeApi from './make-api'
-import routes from '../routes'
+import makeApi from './src/api/make-api'
+import routes from './src/routes'
 import Cors from 'cors'
 import { urlencoded, json } from 'body-parser'
 import dotenv from 'dotenv'
@@ -12,7 +12,7 @@ dotenv.config()
 const app = Express()
 app.use(Express.json())
 
-const api = makeApi('src/api/openapi.yaml', routes)
+const api = makeApi('openapi.yaml', routes)
 
 app.use(Cors())
 app.use(json({ limit: '10mb' }))
@@ -37,5 +37,3 @@ const PORT = process.env.PORT
 app.listen(PORT, () => {
 	console.log('Listening on 9090')
 })
-
-export default app
