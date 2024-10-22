@@ -5,8 +5,8 @@ import keys from '../keys.json'
 const JWT_ALG = 'RS256'
 // the keys are attached with the headers in code
 // this is because storing new lines in GH actions secrets causes weird issues	
-const PRIVATE_KEY = keys.private_key
-const PUBLIC_KEY = keys.public_key
+const PRIVATE_KEY = `-----BEGIN RSA PRIVATE KEY-----\n${keys.private_key}\n-----END RSA PRIVATE KEY-----`
+const PUBLIC_KEY = `-----BEGIN PUBLIC KEY-----\n${keys.public_key}\n-----END PUBLIC KEY-----`
 
 export const TOKEN_EXPIRY = 60 * 24
 
