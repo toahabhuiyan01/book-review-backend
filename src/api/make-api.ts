@@ -102,7 +102,7 @@ function errorHandleWrapper(handler: Handler<Operation>) {
         const body = context.request.body || {}
         const params = context.request.params || {}
 
-        let fullRequest = {
+        const fullRequest = {
             ...query,
             ...body,
             ...params
@@ -114,11 +114,6 @@ function errorHandleWrapper(handler: Handler<Operation>) {
             }
             dotenv.config()
             await mongoClient()
-            try {
-                fullRequest = JSON.parse(Object.values((fullRequest)).join(''))
-            } catch (error) {
-                // do nothing
-            }
             result.body = await handler(
                 fullRequest,
                 { logger },
