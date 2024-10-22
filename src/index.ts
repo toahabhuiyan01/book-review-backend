@@ -1,6 +1,6 @@
 import Express from 'express'
-import makeApi from './src/api/make-api'
-import routes from './src/routes'
+import makeApi from './api/make-api'
+import routes from './routes'
 import Cors from 'cors'
 import { urlencoded, json } from 'body-parser'
 import dotenv from 'dotenv'
