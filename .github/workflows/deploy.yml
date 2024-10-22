@@ -22,12 +22,13 @@ jobs:
     - name: Install packages
       run: npm install
 
+    - name: Copy keys
+      run: echo -e '${{secrets.KEYS}}' > src/keys.json
+
     - name: Create .env.production file
       run: |
         echo "USERNAME=${{ vars.MONGODB_USERNAME }}" >> .env.production
         echo "PASSWORD=${{ vars.MONGODB_USERNAME }}" >> .env.production
-        echo "PUBLIC_KEY=${{ vars.PUBLIC_KEY }}" >> .env.production
-        echo "PRIVATE_KEY=${{ vars.PRIVATE_KEY }}" >> .env.production
     
     - name: Serverless AWS authentication
       run: NODE_ENV=production yarn run sls config credentials --provider aws --key ${{ secrets.AWS_ACCESS_KEY }} --secret ${{ secrets.AWS_SECRET_KEY }}

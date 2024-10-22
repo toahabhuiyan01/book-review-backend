@@ -1,11 +1,12 @@
 import { Boom } from '@hapi/boom'
 import { sign as signJWT, verify as verifyJWT, VerifyOptions } from 'jsonwebtoken'
+import keys from '../keys.json'
 
 const JWT_ALG = 'RS256'
 // the keys are attached with the headers in code
-// this is because storing new lines in GH actions secrets causes weird issues
-const PRIVATE_KEY = process.env.PRIVATE_KEY!
-const PUBLIC_KEY = process.env.PUBLIC_KEY!
+// this is because storing new lines in GH actions secrets causes weird issues	
+const PRIVATE_KEY = keys.private_key
+const PUBLIC_KEY = keys.public_key
 
 export const TOKEN_EXPIRY = 60 * 24
 
