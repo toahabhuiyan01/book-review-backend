@@ -37,3 +37,5 @@ const PORT = process.env.PORT
 app.listen(PORT, () => {
 	console.log('Listening on 9090')
 })
+
+export default app
