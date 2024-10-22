@@ -109,7 +109,7 @@ function errorHandleWrapper(handler: Handler<Operation>) {
         } as FullRequest<Operation>
 
         try {
-            if(context.validation.errors) {
+            if(context.validation?.errors) {
                 throw new Boom('Invalid Request', { statusCode: 400, data: context.validation.errors })
             }
             dotenv.config()
