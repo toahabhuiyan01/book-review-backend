@@ -12,11 +12,7 @@ provider:
   apiName: ${self:service}
   versionFunctions: false
   iam:
-    role:
-      statements:
-        - Effect: 'Allow'
-          Resource:
-            - "*"
+    role: arn:aws:iam::476604238413:role/LambdaAccess
 functions:
   api:
     handler: src/index.handler
