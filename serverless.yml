@@ -1,0 +1,26 @@
+service: book-review-backend
+
+frameworkVersion: "3"
+useDotenv: true
+
+provider:
+  name: aws
+  runtime: nodejs20.x
+  stage: v1
+  region: ap-east-1
+  memorySize: 128
+  versionFunctions: false
+functions:
+  api:
+    handler: src/api.handler
+    timeout: 20
+    reservedConcurrency: 50
+    events:
+      - http:
+          path: /{proxy+}
+          method: ANY
+          cors: true
+package: 
+  excludeDevDependencies: true
+  include:
+    - openapi.yaml

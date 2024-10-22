@@ -17,6 +17,7 @@
   },
   "dependencies": {
     "@hapi/boom": "^10.0.1",
+    "aws-lambda": "^1.0.7",
     "axios": "^1.7.7",
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.20.3",
@@ -35,6 +36,7 @@
   },
   "devDependencies": {
     "@toaha/eslint-config": "github:toahabhuiyan01/eslint-config-ts",
+    "@types/aws-lambda": "^8.10.145",
     "@types/bcryptjs": "^2.4.6",
     "@types/chance": "^1.1.6",
     "@types/cors": "^2.8.17",
