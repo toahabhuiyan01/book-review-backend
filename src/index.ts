@@ -1,8 +1,8 @@
-import routes from "../routes";
-import makeApi from "./make-api";
+import routes from "./routes";
+import makeApi from "./api/make-api";
 
 export default function handler(req, res) {
-    const api = makeApi('build/api/openapi.yaml', routes)
+    const api = makeApi('api/openapi.yaml', routes)
     api.handleRequest(
         {
             method: req.method,
