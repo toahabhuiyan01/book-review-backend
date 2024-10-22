@@ -19,6 +19,8 @@ export interface paths {
     "/user": {
         parameters: {
         };
+        /** Get user details */
+        get: operations["userGet"];
         /** Update user details */
         patch: operations["userPatch"];
     };
@@ -61,6 +63,12 @@ export interface components {
         BookReview: {
             /** @description ID of the review */
             id?: string;
+            reviewer?: {
+                id: components["schemas"]["UserId"];
+                username: components["schemas"]["UserName"];
+                /** @description Email of the user */
+                email: string;
+            };
             rating: components["schemas"]["Rating"];
             /** @description Comment for the rating */
             reviewText?: string;
@@ -189,6 +197,21 @@ export interface operations {
                 };
                 content: {
                     "application/json": components["schemas"]["LoginResponse"];
+                };
+            };
+        };
+    };
+    userGet: {
+        parameters: {
+        };
+        responses: {
+            /** @description User details fetched successfully */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["User"];
                 };
             };
         };

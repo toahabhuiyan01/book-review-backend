@@ -1,13 +1,16 @@
 import { Handler } from "../api/make-api";
 import Review from "../entity/BookReview";
+import { cleanObject } from "../utils/cleanObject";
 
 const handler: Handler<'bookReviewGet'> = async(
     { page=1, id, limit=20 }
 ) => {
+    page = +page
+    limit = +limit
     const skip = (page - 1) * limit
 
     const reviews = await Review
-        .find({ user: id })
+        .find(cleanObject({ reviewer: id }), { __v: 0 }, { sort: { createdAt: -1 } })
         .populate('reviewer', 'username email avatar')
         .skip(skip)
         .limit(limit)
@@ -16,7 +19,7 @@ const handler: Handler<'bookReviewGet'> = async(
     const total = await Review.countDocuments({ user: id })
 
     return {
-        reviews,
+        reviews: reviews.map((review) => ({ id: review.id, ...review._doc })),
         total,
         currentPage: page
     }

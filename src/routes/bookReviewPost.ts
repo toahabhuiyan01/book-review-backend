@@ -14,10 +14,13 @@ const handler: Handler<'bookReviewPost'> = async(
         reviewer: id
     })
 
-    const reviewCreated = await review.save()
+    const res = await review.save()
     
     return {
-        review: reviewCreated
+        review: {
+            id: res.id,
+            ...res._doc
+        }
     }
 }
 

@@ -8,7 +8,7 @@ const JWT_ALG = 'RS256'
 const PRIVATE_KEY = keys.private_key
 const PUBLIC_KEY = keys.public_key
 
-export const TOKEN_EXPIRY = 60 * 24 * 1000
+export const TOKEN_EXPIRY = 60 * 24
 
 export type GenerateJWTOptions = {
     user: {

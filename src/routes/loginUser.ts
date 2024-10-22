@@ -13,9 +13,9 @@ const handler: Handler<'loginUser'> = async(
             throw new Boom('User not found', { statusCode: 404 })
         }
 
-        const validPassword = await passwordCheckMatch(req.password, userDB.password)
+        const validPassword = await passwordCheckMatch(userDB.password, req.password)
         if (!validPassword) {
-            throw new Boom('Invalid password', { statusCode: 401 })
+            throw new Boom('Email or password is not correct', { statusCode: 401 })
         }
 
 

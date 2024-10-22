@@ -63,7 +63,6 @@ export default function(
                 }
 
                 const user = validateAccessToken(token)
-                console.log(auth, user)
                 return user
             }
         } catch (error) {
