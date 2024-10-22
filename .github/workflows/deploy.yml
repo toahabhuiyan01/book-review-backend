@@ -22,19 +22,12 @@ jobs:
     - name: Install packages
       run: npm install
 
-    - name: Print environment variables
-      run: |
-        echo "USERNAME=${{ env.USERNAME }}"
-        echo "PASSWORD=${{ env.PASSWORD }}"
-        echo "PUBLIC_KEY=${{ env.PUBLIC_KEY }}"
-        echo "PRIVATE_KEY=${{ env.PRIVATE_KEY }}"
-
     - name: Create .env.production file
       run: |
-        echo "USERNAME=${{ env.USERNAME }}" >> .env.production
-        echo "PASSWORD=${{ env.PASSWORD }}" >> .env.production
-        echo "PUBLIC_KEY=${{ env.PUBLIC_KEY }}" >> .env.production
-        echo "PRIVATE_KEY=${{ env.PRIVATE_KEY }}" >> .env.production
+        echo "USERNAME=${{ vars.MONGODB_USERNAME }}" >> .env.production
+        echo "PASSWORD=${{ vars.MONGODB_USERNAME }}" >> .env.production
+        echo "PUBLIC_KEY=${{ vars.PUBLIC_KEY }}" >> .env.production
+        echo "PRIVATE_KEY=${{ vars.PRIVATE_KEY }}" >> .env.production
     
     - name: Serverless AWS authentication
       run: NODE_ENV=production yarn run sls config credentials --provider aws --key ${{ secrets.AWS_ACCESS_KEY }} --secret ${{ secrets.AWS_SECRET_KEY }}
