@@ -150,6 +150,17 @@ function errorHandleWrapper(handler: Handler<Operation>) {
             'Request Complete'
         )
 
-        res.status(result.statusCode).send(result.body)
+        if(typeof res?.status === 'function') {
+			res.set(headers)
+			return res
+				.status(result.statusCode)
+				.send(result.body)
+		} else {
+			return {
+				statusCode: result.statusCode,
+				body: JSON.stringify(result.body),
+				headers
+			}
+		}
     }
 }

@@ -1,6 +1,9 @@
 import { APIGatewayProxyEvent, Context } from 'aws-lambda'
 import makeApi from './api/make-api'
 import routes from './routes'
+import dotenv from 'dotenv'
+
+dotenv.config()
 
 export const api = makeApi('openapi.yaml', routes)
 export const handler = (event: APIGatewayProxyEvent, context: Context) => api.handleRequest(
