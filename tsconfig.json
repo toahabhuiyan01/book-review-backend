@@ -20,8 +20,8 @@
   "include": [
     "src/*.ts", 
     "src/*/*.ts",
-    "openapi.yaml"
-, "index.ts"  ],
+    "index.ts"  
+  ],
   "exclude": [
     "node_modules", 
     "src/tests"
