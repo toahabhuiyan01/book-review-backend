@@ -11,7 +11,7 @@
     "postinstall": "npm run build",
     "build": "tsc",
     "watch-build": "tsc -w",
-    "start": "node build/index.js",
+    "start": "node build/serve-express.js",
     "watch-start": "nodemon --delay 2 -w build/ -x 'npm run start'",
     "dev": "concurrently -k -p '[{name}]' -n 'typescript,api' -c 'yellow.bold,cyan.bold' npm:watch-build npm:watch-start"
   },
