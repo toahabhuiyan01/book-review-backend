@@ -16,7 +16,7 @@ functions:
   api:
     handler: src/index.handler
     timeout: 10
-    reservedConcurrency: 2
+    reservedConcurrency: 1
     events:
       - http:
           path: /{proxy+}
