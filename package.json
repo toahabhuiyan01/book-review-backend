@@ -1,7 +1,7 @@
 {
   "name": "@bookreview/backend",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "build/index.js",
   "scripts": {
     "type:gen": "npx openapi-typescript ./openapi.yaml -o src/types/openapi.ts --root-types",
     "types:clean": "npx ts-node src/types/generator-util.ts",
