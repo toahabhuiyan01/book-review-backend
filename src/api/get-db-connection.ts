@@ -5,9 +5,7 @@ async function dbConnect() {
 		return
     }
     
-	const password = process.env.MONGODB_PASSWORD
-    const username = process.env.MONGODB_USERNAME
-	const dbUrl = `mongodb+srv://${username}:${password}@cluster0.yptboqt.mongodb.net/`
+	const dbUrl = process.env.MONGODB_URL!
 
 	try {
 		const conn = await Moongose.connect(dbUrl)
