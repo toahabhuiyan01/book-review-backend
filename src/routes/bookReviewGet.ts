@@ -3,7 +3,7 @@ import Review from "../entity/BookReview";
 import { cleanObject } from "../utils/cleanObject";
 
 const handler: Handler<'bookReviewGet'> = async(
-    { page=1, id, limit=20 }
+    { page=1, id, limit=10 }
 ) => {
     page = +page
     limit = +limit
@@ -16,7 +16,7 @@ const handler: Handler<'bookReviewGet'> = async(
         .limit(limit)
         .exec()
     
-    const total = await Review.countDocuments({ user: id })
+    const total = await Review.countDocuments(cleanObject({ reviewer: id }))
 
     return {
         reviews: reviews.map((review) => ({ id: review.id, ...review._doc })),
