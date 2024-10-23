@@ -18,3 +18,4 @@ Here I used this hosted backend API for REST operations in the frontend
 - Lambda (TypeScript)
 - OpenapiBackend (it works as a middleware and does all the api request validation, authorization and others.)
 - MongoDB (mongoose)
+- Github Actions for CI/CD
