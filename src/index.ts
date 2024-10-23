@@ -12,7 +12,7 @@ export const handler = (event: APIGatewayProxyEvent, context: Context) => {
         {
             method: event.httpMethod,
             path: event.path,
-            body: JSON.parse(event.body || '{}'),
+            body: event.body,
             query: event.queryStringParameters as { [_: string]: string | string[] },
             headers: event.headers as { [_: string]: string | string[] },
         },
