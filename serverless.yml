@@ -15,6 +15,7 @@ provider:
 functions:
   api:
     handler: src/index.handler
+    timeout: 30
     events:
       - http:
           path: /{proxy+}
