@@ -8,10 +8,11 @@
     "gen:types": "npm run type:gen && npm run types:clean ",
     "lint": "eslint ./src --ext .js,.ts",
     "lint:fix": "npm run lint -- --fix",
-    "watch-build": "tsc -w",
-    "watch-start": "nodemon --delay 2 -w build/ -x 'npm run start'",
-    "dev": "concurrently -k -p '[{name}]' -n 'typescript,api' -c 'yellow.bold,cyan.bold' npm:watch-build npm:watch-start",
-    "start": "sls offline --httpPort 3001 start"
+    "build": "tsc",
+    "start": "sls offline --httpPort 3001 start",
+    "start-express": "node build/serve-express.js",
+    "dev": "concurrently npm:build npm:start",
+    "dev:express": "concurrently npm:build npm:start-express"
   },
   "dependencies": {
     "@hapi/boom": "^10.0.1",
