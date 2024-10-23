@@ -7,7 +7,6 @@ dotenv.config()
 
 export const api = makeApi('openapi.yaml', routes)
 export const handler = (event: APIGatewayProxyEvent, context: Context) => {
-    console.log(event)
     return api.handleRequest(
         {
             method: event.httpMethod,
