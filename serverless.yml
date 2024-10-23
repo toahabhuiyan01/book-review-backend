@@ -11,7 +11,7 @@ provider:
   memorySize: 256
   apiName: ${self:service}
   versionFunctions: false
-  role: arn:aws:iam::476604238413:role/LambdaAccess
+  role: arn:aws:iam::156041427302:role/LambdaCloudwatch
 functions:
   api:
     handler: src/index.handler
